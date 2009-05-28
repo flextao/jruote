@@ -1,0 +1,11 @@
+= JRuote
+
+Support JRuote version: 0.0.x
+
+JRuote builds Java adapter for integrating ruby workflow engine ruote with Java.
+
+See EngineAdapterTest.java for examples.
+
+== License
+
+JRuote is available under an MIT License.

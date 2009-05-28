@@ -1,10 +1,13 @@
 
+require 'rake'
+
 namespace :ruote do
 
   RUFUSES = %w{ 
     dollar lru mnemo scheduler verbs sixjo treechecker
   }.collect { |e| "rufus-#{e}" }
 
+  desc "get ruote and its rufus dependencies from github default branches"
   task :get_from_github do
     rm_r 'vendor/ruote' if File.exists?('vendor/ruote')
     mkdir 'vendor/ruote' #unless File.exists?('vendor/ruote')
@@ -24,6 +27,7 @@ namespace :ruote do
   a new version.
 
       }
+    end
   end
 
   def git_clone (elt)
