@@ -15,14 +15,14 @@
 	<classpathentry kind="lib" path="vendor/activesupport-2.3.2/lib"/>
 	<classpathentry kind="lib" path="vendor/builder-2.1.2/lib"/>
 	<classpathentry kind="lib" path="vendor/ruby_parser-2.0.2/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-dollar/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-lru/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-mnemo/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-scheduler/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-sixjo/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-treechecker/lib"/>
-	<classpathentry kind="lib" path="vendor/rufus-verbs/lib"/>
-	<classpathentry kind="lib" path="vendor/ruote/lib"/>
 	<classpathentry kind="lib" path="vendor/sexp_processor-3.0.1/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-dollar/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-lru/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-mnemo/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-scheduler/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-sixjo/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-treechecker/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/rufus-verbs/lib"/>
+	<classpathentry kind="lib" path="vendor/ruote/ruote/lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
