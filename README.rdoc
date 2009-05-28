@@ -22,4 +22,4 @@ options:
 
 == License
 
-JRuote is available under an MIT License.
+JRuote is available under an MIT License Copyright (c) 2009 Flextao, Li Xiao <xli@flextao.com>.
