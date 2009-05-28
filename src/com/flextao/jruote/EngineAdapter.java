@@ -18,13 +18,13 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
-***********************************************************************/
+ ***********************************************************************/
 
 package com.flextao.jruote;
 
+import static com.flextao.jruote.Helpers.read;
 import static org.jruby.javasupport.JavaEmbedUtils.initialize;
 import static org.jruby.javasupport.JavaEmbedUtils.terminate;
-import static com.flextao.jruote.Helpers.read;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,7 +70,7 @@ public class EngineAdapter {
         require("openwfe/extras/participants/ar_workitem_ext");
         require("openwfe/extras/participants/sync_java_participant_adapter");
         log.info("eval engine difinition script...");
-        engine = syncEvalScript(engineDefinitionScript);
+        engine = eval(engineDefinitionScript);
         log.info("initialized engine adapter");
     }
 
@@ -79,7 +79,7 @@ public class EngineAdapter {
     }
 
     public void registerSyncParticipant(String name, Participant participant) {
-        JRubyObject syncJavaParticipantAdapterClass = syncEvalScript("OpenWFE::Extras::SyncJavaParticipantAdapter");
+        JRubyObject syncJavaParticipantAdapterClass = eval("OpenWFE::Extras::SyncJavaParticipantAdapter");
         Participant adapter = syncJavaParticipantAdapterClass.send("new", participant);
         registerParticipant(name, adapter);
     }
@@ -117,7 +117,7 @@ public class EngineAdapter {
 
     public void clearARConnections() {
         log.info("clear all ActiveRecord connections");
-        syncEvalScript("ActiveRecord::Base.clear_all_connections!");
+        eval("ActiveRecord::Base.clear_all_connections!");
     }
 
     public void launch(URL processDefinitionURL) {
@@ -139,7 +139,7 @@ public class EngineAdapter {
     }
 
     public void reply(ArWorkitem workItem) {
-        reply(syncEvalScript("OpenWFE::Extras::ArWorkitem.convert_to_in_flow_work_item(" + workItem.getId() + ")"));
+        reply(eval("OpenWFE::Extras::ArWorkitem.convert_to_in_flow_work_item(" + workItem.getId() + ")"));
     }
 
     public void reply(IRubyObject workItem) {
@@ -162,15 +162,15 @@ public class EngineAdapter {
         engine.send("cancel_process", wfid);
     }
 
-    public JRubyObject syncEvalScript(String script) {
+    public JRubyObject eval(String script) {
         return new JRubyObject(runtime.evalScriptlet(script));
     }
 
-    private JRubyObject launchVariables(String variables) {
+    public JRubyObject launchVariables(String variables) {
         if (variables == null) {
-            return syncEvalScript("{}");
+            return eval("{}");
         }
-        return syncEvalScript("{:variables => {" + variables + "}}");
+        return eval("{:variables => {" + variables + "}}");
     }
 
     private synchronized void shouldBeReady() {
