@@ -2,9 +2,21 @@
 
 Support JRuote version: 0.0.x
 
-JRuote builds Java adapter for integrating ruby workflow engine ruote with Java.
+JRuote builds Java adapter for embedding ruby workflow engine ruote in Java by JRuby.
 
-See EngineAdapterTest.java for examples.
+See EngineAdapterTest.java for examples. And read ruote docs (http://openwferu.rubyforge.org/) 
+for understanding how ruote works.
+
+== Use it in your project
+
+  Download jruote-1.0.0RC1.jar (including all ruby gems need) from http://github.com/flextao/jruote/downloads
+  Download jars depend from lib directory
+
+== Build jruote jar
+
+  clone the repository to your local
+  run rake 'rake ruote:get_from_github' in terminal to get ruote and its dependencies from github
+  run ant 'ant' in terminal to build the jruote.jar in targets directory
 
 == Dependencies
 
@@ -13,13 +25,18 @@ runtime jars:
   jruby-complete-1.3.0RC1.jar
   log4j-1.2.15.jar
   log5j-1.2.jar
-  persistence.jar
+
+all ruby gems need except ruote and its dependencies is inside vendor directory.
 
 options:
 
-  hibernate-annotations.jar (hibernate entities in package 'com.flextao.jruote.models')
+  persistence.jar, hibernate-annotations.jar (hibernate entities in package 'com.flextao.jruote.models')
   jdbc_adapter_internal.jar (when you are launching active record engine)
 
 == License
 
-JRuote is available under an MIT License Copyright (c) 2009 Flextao, Li Xiao <xli@flextao.com>.
+JRuote is available under an MIT License Copyright (c) 2009 Flextao.
+
+== Authors
+
+Li Xiao <xli@flextao.com>
