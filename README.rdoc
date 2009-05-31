@@ -3,14 +3,42 @@
 Support JRuote version: 0.0.x
 
 JRuote builds Java adapter for embedding ruby workflow engine ruote in Java by JRuby.
-
-See EngineAdapterTest.java for examples. And read ruote docs (http://openwferu.rubyforge.org/) 
-for understanding how ruote works.
+Please read ruote docs (http://openwferu.rubyforge.org/) for understanding how ruote works.
 
 == Use it in your project
 
-  Download jruote-1.0.0RC1.jar (including all ruby gems need) from http://github.com/flextao/jruote/downloads
-  Download jars depend from lib directory
+* Download jruote-1.0.0RC1.jar (including all ruby gems need) from http://github.com/flextao/jruote/downloads
+* Download jars depend from libs directory
+* Write an engine.rb and put it in the root directory of your Java source directory.
+* Write an Engine.java to initialize the engine.rb with an com.flextao.jruote.EngineAdapter instance.
+* There is one thing you must be very careful
+
+    The last line of engine.rb code must be the engine object instance you created inside the engine.rb
+    so that jruote EngineAdapter could get the engine instance. Take a look the simple example if you don't
+    get it. 
+
+== Examples
+
+=== Simple example
+
+The following is a simple engine.rb example:
+
+    require 'openwfe/engine'
+    require 'logger'
+    
+    application_context = {}
+    application_context[:engine_name] = "simple engine"
+    application_context[:logger] = Logger.new STDOUT
+    application_context[:logger].level = Logger::ERROR
+
+    OpenWFE::Engine.new(application_context)
+
+See EngineAdapterTest.java for more simple examples. 
+
+=== ActiveRecord engine example
+
+  See examples in 'examples' directory, an activerecord engine currently have, please take a look
+  the README file inside the example directory.
 
 == Build jruote jar
 

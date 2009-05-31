@@ -1,0 +1,10 @@
+
+This example shows you how to create an active record based ruote engine with JRuote.
+The java code is not fully completed for keeping it simple.
+The Entity class is a business entity, which may means anything you want in your
+business process.
+
+In this example, we use Entity#id as storeName of ArWorkitem, for processing the entity
+to keep process move on.
+Ruote-web2 shows you another strategy to process the storeName and processes, please
+read it for farther understanding how storeName and participant works.
