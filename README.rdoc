@@ -13,9 +13,9 @@ Please read ruote docs (http://openwferu.rubyforge.org/) for understanding how r
 * Write an Engine.java to initialize the engine.rb with an com.flextao.jruote.EngineAdapter instance.
 * There is one thing you must be very careful
 
-    The last line of engine.rb code must be the engine object instance you created inside the engine.rb
-    so that jruote EngineAdapter could get the engine instance. Take a look the simple example if you don't
-    get it. 
+  The last line of engine.rb code must be the engine object instance you created inside the engine.rb
+  so that jruote EngineAdapter could get the engine instance. Take a look the simple example if you don't
+  get it. 
 
 * Here is some tips of embedding a ruby gem in Java by JRuby: http://blog.flextao.com/index.php/2009/05/30/tips-of-embedding-ruby-gem-in-java/
 
@@ -23,17 +23,39 @@ Please read ruote docs (http://openwferu.rubyforge.org/) for understanding how r
 
 === Simple example
 
-The following is a simple engine.rb example:
+The following is a simple engine.rb put in root directory of Java source:
 
-    require 'openwfe/engine'
-    require 'logger'
-    
-    application_context = {}
-    application_context[:engine_name] = "simple engine"
-    application_context[:logger] = Logger.new STDOUT
-    application_context[:logger].level = Logger::ERROR
+  require 'openwfe/engine'
+  require 'logger'
+  
+  application_context = {}
+  application_context[:engine_name] = "simple engine"
+  application_context[:logger] = Logger.new STDOUT
+  application_context[:logger].level = Logger::ERROR
 
-    OpenWFE::Engine.new(application_context)
+  OpenWFE::Engine.new(application_context)
+
+A simple process definition(simplest_process_definition.rb put in root directory of Java source):
+
+  class SimplestProcessDefinition < OpenWFE::ProcessDefinition
+    sequence do
+      alice
+      bob
+    end
+  end
+
+Launch the engine:
+
+  InputStream engineDefinition = getClass().getResourceAsStream("/engine.rb");
+  engine = new EngineAdapter(engineDefinition);
+  engine.registerSyncParticipant("alice", new LoggerParticipant("alice"));
+  engine.registerSyncParticipant("bob", new LoggerParticipant("bob"));
+  engine.ready();
+
+Launch a instance of the simplest process:
+
+  URL processDefinition = getClass().getResource("/simplest_process_definition.rb");
+  engine.launch(processDefinition);
 
 See EngineAdapterTest.java for more simple examples. Details about the engine settings please read ruote documents.
 
