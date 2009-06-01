@@ -16,6 +16,17 @@ public class WorkItemFields {
     private static final String ENTITY_TYPE = "entity_type";
     private static final String LAUNCHER = "launcher";
 
+    public static String join(Collection<?> collections, String sep) {
+        StringBuffer result = new StringBuffer();
+        for (Iterator<?> iter = collections.iterator(); iter.hasNext();) {
+            result.append(iter.next());
+            if (iter.hasNext()) {
+                result.append(sep);
+            }
+        }
+        return result.toString();
+    }
+
     @Inject
     private HibernateEntityManager manager;
 
@@ -34,6 +45,8 @@ public class WorkItemFields {
         return loadEntity(workitem, id, type);
     }
 
+    // for we are running in different thread with creating the Entity code
+    // so that we have to wait until the entity is commited into database.
     private Entity loadEntity(WorkItemAdapter workitem, String id, Class<?> type) {
         long timeout = TEN_SECS;
         long startAt = System.currentTimeMillis();
@@ -53,9 +66,11 @@ public class WorkItemFields {
 
     public User launcher(WorkItemAdapter workitem) {
         String username = as(workitem.getAttribute(LAUNCHER));
+        // here, loadByUsername is not real interface of the HibernateEntityManager
+        // get it right in your case.
         User launcher = manager.loadByUsername(User.class, username);
         if (launcher == null) {
-            throw new BusinessException("用户不存在[username = " + username + "]");
+            throw new BusinessException("couldn't find user by [username = " + username + "]");
         }
         return launcher;
     }

@@ -36,13 +36,14 @@ public class Engine {
     }
 
     public void launch(URL processDefinition, Entity entity, User user) {
-        String variables = itemFields().asVariables(taskable, user.getUsername());
+        String variables = itemFields().asVariables(entity, user.getUsername());
         engine.launch(processDefinition, variables);
         appendWaitToTransactionComplete();
     }
 
     public void reply(Entity entity) {
         String storeName = entity.relatedEntity().getId();
+        // you should create ArWorkItemService by your self, which is just a lookup service of ArWorkItem
         List<ArWorkitem> items = ArWorkItemService.getInstance().listByStoreName(storeName);
         for (ArWorkitem item : items) {
             engine.reply(item);
@@ -66,8 +67,15 @@ public class Engine {
         engine.stop();
     }
 
+    /**
+     * we should wait a moment for ruote background process catch up the work.
+     * you don't have to do this if you don't need the process result directly
+     * see ruote document for more info.
+     * the following code is depending on Hibernate Transaction interface.
+     */
     private void appendWaitToTransactionComplete() {
-        KernelContext.getTransactionWrapper().registerSynchronization(new Synchronization() {
+         //'Context.injector()' returns a com.google.inject.Injector instance
+        Context.injector().getInstance(Session.class).getTransaction().registerSynchronization(new Synchronization() {
             public void afterCompletion(int arg0) {
                 ThreadHelper.sleep(waitTimeAfterTransactionCompleted);
             }
@@ -78,7 +86,8 @@ public class Engine {
     }
 
     private WorkItemFields itemFields() {
-        return KernelContext.getInstance(WorkItemFields.class);
+        //'Context.injector()' returns a com.google.inject.Injector instance
+        return Context.injector().getInstance(WorkItemFields.class);
     }
 
     private void loadEngine() {

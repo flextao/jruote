@@ -8,3 +8,6 @@ In this example, we use Entity#id as storeName of ArWorkitem, for processing the
 to keep process move on.
 Ruote-web2 shows you another strategy to process the storeName and processes, please
 read it for farther understanding how storeName and participant works.
+
+Little more background info, this example is extracted from my working project, which
+uses Google Guice as dependency injection framework and Hibernate as persistence framework.
