@@ -8,7 +8,7 @@ Please read ruote docs (http://openwferu.rubyforge.org/) for understanding how r
 == Use it in your project
 
 * Download jruote-1.0.0RC1.jar (including all ruby gems need) from http://github.com/flextao/jruote/downloads
-* Download jars depend from libs directory
+* Download dependency jars from libs directory
 * Write an engine.rb and put it in the root directory of your Java source directory.
 * Write an Engine.java to initialize the engine.rb with an com.flextao.jruote.EngineAdapter instance.
 * There is one thing you must be very careful
@@ -16,6 +16,8 @@ Please read ruote docs (http://openwferu.rubyforge.org/) for understanding how r
     The last line of engine.rb code must be the engine object instance you created inside the engine.rb
     so that jruote EngineAdapter could get the engine instance. Take a look the simple example if you don't
     get it. 
+
+* Here is some tips of embedding a ruby gem in Java by JRuby: http://blog.flextao.com/index.php/2009/05/30/tips-of-embedding-ruby-gem-in-java/
 
 == Examples
 
@@ -33,7 +35,7 @@ The following is a simple engine.rb example:
 
     OpenWFE::Engine.new(application_context)
 
-See EngineAdapterTest.java for more simple examples. 
+See EngineAdapterTest.java for more simple examples. Details about the engine settings please read ruote documents.
 
 === ActiveRecord engine example
 
@@ -65,6 +67,6 @@ options:
 
 JRuote is available under an MIT License Copyright (c) 2009 Flextao.
 
-== Authors
+== Author
 
 Li Xiao <xli@flextao.com>
