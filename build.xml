@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="workflow-engine" basedir="." default="jar">
+<project name="jruote" basedir="." default="jar">
   <property name="libs.dir" value="${basedir}/libs" />
   <property name="src.dir" value="${basedir}/src"/>
   <property name="test.dir" value="${basedir}/test"/>

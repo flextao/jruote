@@ -39,7 +39,7 @@ import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class EntineAdapterTest {
+public class EngineAdapterTest {
 
     private EngineAdapter engine;
 
