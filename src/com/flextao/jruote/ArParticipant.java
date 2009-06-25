@@ -31,17 +31,17 @@ import org.jruby.runtime.builtin.IRubyObject;
  */
 public abstract class ArParticipant implements Participant {
 
-    protected void consumeArParticipant(String storeName, IRubyObject workitem) {
-        callArParticipant(storeName, "consume", workitem);
+    protected IRubyObject consumeArParticipant(String storeName, IRubyObject workitem) {
+       return callArParticipant(storeName, "consume", workitem);
     }
 
-    protected void cancelArParticipant(String storeName, IRubyObject workitem) {
-        callArParticipant(storeName, "cancel", workitem);
+    protected IRubyObject cancelArParticipant(String storeName, IRubyObject workitem) {
+        return callArParticipant(storeName, "cancel", workitem);
     }
 
-    protected void callArParticipant(String storeName, String method, IRubyObject workitem) {
+    protected IRubyObject callArParticipant(String storeName, String method, IRubyObject workitem) {
         Ruby runtime = workitem.getRuntime();
-        newArParticipant(runtime, storeName).callMethod(runtime.getCurrentContext(), method, workitem);
+        return newArParticipant(runtime, storeName).callMethod(runtime.getCurrentContext(), method, workitem);
     }
 
     public boolean doNotThread() {

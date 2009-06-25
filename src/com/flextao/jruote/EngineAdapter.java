@@ -139,7 +139,16 @@ public class EngineAdapter {
     }
 
     public void reply(ArWorkitem workItem) {
-        reply(eval("OpenWFE::Extras::ArWorkitem.convert_to_in_flow_work_item(" + workItem.getId() + ")"));
+        reply(toInFlowWorkItem(workItem.getId()));
+    }
+    public JRubyObject toInFlowWorkItem(long workItemId) {
+        return eval("OpenWFE::Extras::ArWorkitem.convert_to_in_flow_work_item(" + workItemId + ")");
+    }
+    public WorkItemAdapter toWorkItemAdapter(long workItemId) {
+        return new WorkItemAdapter(toInFlowWorkItem(workItemId));
+    }
+    public WorkItemAdapter toWorkItemAdapter(String workItemId) {
+        return toWorkItemAdapter(Long.parseLong(workItemId));
     }
 
     public void reply(IRubyObject workItem) {

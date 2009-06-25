@@ -34,7 +34,10 @@ public class WorkItemAdapter {
     private final JRubyObject workitem;
 
     public WorkItemAdapter(IRubyObject workitem) {
-        this.workitem = new JRubyObject(workitem);
+        this(new JRubyObject(workitem));
+    }
+    public WorkItemAdapter(JRubyObject workitem) {
+        this.workitem = workitem;
     }
 
     public String participantName() {
@@ -59,6 +62,14 @@ public class WorkItemAdapter {
 
     public Map<String, Object> getAttributes() {
         return this.workitem.send("attributes");
+    }
+
+    public Map<String, Object> getParams() {
+        return this.workitem.send("params");
+    }
+
+    public void reply(EngineAdapter engine) {
+        engine.reply(workitem);
     }
 
     @Override

@@ -215,6 +215,18 @@ public class EngineAdapterTest {
         assertEquals("consumed participant[alice];consumed participant[bob];canceled participant[bob];", LoggerParticipant.log);
     }
 
+    @Test
+    public void workItemAdapterActivityParam() throws IOException, InterruptedException {
+        LogActivityParamParticipant.log = new StringBuffer();
+        InputStream engineDefinition = getClass().getResourceAsStream("/simple_engine.rb");
+        engine = new EngineAdapter(engineDefinition);
+        engine.registerParticipant("*", new LogActivityParamParticipant());
+        engine.ready();
+        engine.launch(getClass().getResource("/simplest_process_definition.rb"));
+        sleepAMoment();
+        assertEquals("step 1", LogActivityParamParticipant.log.toString());
+    }
+
     private void sleepAMoment() throws InterruptedException {
         Thread.sleep(300);
     }

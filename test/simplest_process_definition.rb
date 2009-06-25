@@ -1,7 +1,7 @@
 
 class SimplestProcessDefinition < OpenWFE::ProcessDefinition
   sequence do
-    alice
+    alice :activity => "step 1"
     bob
   end
 end
