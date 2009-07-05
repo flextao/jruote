@@ -210,6 +210,12 @@ public class ArWorkitem {
         return id;
     }
 
+    /**
+     * this method use jruby yaml lib jvyamlb to load wiFields string without
+     * jruby runtime, couldn't handle well with multibytes chars.
+     * when multibytes chars cause problem, you can use JRuby runtime to load
+     * a YAML IRubyObject to dump/load YAML string.
+     */
     @SuppressWarnings("unchecked")
     @Transient
     public Map<String, Object> wiFieldsMap() {
