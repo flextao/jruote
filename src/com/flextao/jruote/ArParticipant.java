@@ -39,7 +39,10 @@ public abstract class ArParticipant implements Participant {
         return callArParticipant(storeName, "cancel", workitem);
     }
 
-    protected IRubyObject callArParticipant(String storeName, String method, IRubyObject workitem) {
+    /**
+     * have to be synchronized, looks like jruby runtime has thread safe problem when doing this work
+     */
+    protected synchronized IRubyObject callArParticipant(String storeName, String method, IRubyObject workitem) {
         Ruby runtime = workitem.getRuntime();
         return newArParticipant(runtime, storeName).callMethod(runtime.getCurrentContext(), method, workitem);
     }
@@ -48,7 +51,7 @@ public abstract class ArParticipant implements Participant {
         return false;
     }
 
-    private synchronized IRubyObject newArParticipant(Ruby runtime, String storeName) {
+    private IRubyObject newArParticipant(Ruby runtime, String storeName) {
         runtime.getLoadService().require("openwfe/extras/participants/ar_participants");
         StringBuffer script = new StringBuffer("OpenWFE::Extras::ArParticipant.new(");
         if (storeName != null) {
