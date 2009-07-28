@@ -76,7 +76,7 @@ public class ArWorkitem {
 
     private static final String DEFAULT_ENCODING = "UTF-8";
 
-    private long id;
+    private Integer id;
     private String fei;
     private String wfid;
     private String expid;
@@ -200,13 +200,13 @@ public class ArWorkitem {
         return wiFields;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 

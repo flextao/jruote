@@ -61,7 +61,7 @@ import org.hibernate.annotations.Index;
 @Table(name = "history")
 @Entity
 public class History {
-    private long id;
+    private Integer id;
     private Date createdAt;
     private String source;
     private String event;
@@ -154,13 +154,13 @@ public class History {
         return message;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 }

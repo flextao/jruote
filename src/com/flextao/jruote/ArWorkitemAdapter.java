@@ -21,6 +21,9 @@ public class ArWorkitemAdapter {
         this.item = new JRubyObject(arWorkitem);
     }
 
+    /**
+     * @return a java Long value
+     */
     public Long getId() {
         return item.send("id");
     }

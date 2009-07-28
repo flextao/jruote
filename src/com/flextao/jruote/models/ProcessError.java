@@ -53,7 +53,7 @@ import org.hibernate.annotations.Index;
 @Table(name = "process_errors")
 @Entity
 public class ProcessError {
-    private long id;
+    private Integer id;
     private Date createdAt;
     private String wfid;
     private String expid;
@@ -89,12 +89,12 @@ public class ProcessError {
     public String getSvalue() {
         return svalue;
     }
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 }

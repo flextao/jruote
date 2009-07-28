@@ -59,7 +59,7 @@ import org.hibernate.annotations.Index;
 @Table(name = "expressions")
 @Entity
 public class Expression {
-    private long id;
+    private Integer id;
     private String fei;
     private String wfid;
     private String expid;
@@ -104,12 +104,12 @@ public class Expression {
     public String getSvalue() {
         return svalue;
     }
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 }
